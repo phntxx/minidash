@@ -1,0 +1,88 @@
+apps:
+  pfSense:
+    url: https://example.com
+    display_url: example.com
+    icon: security
+
+  Pi-hole:
+    url: https://example.com
+    display_url: example.com
+    icon: vpn_lock
+
+  Tautulli:
+    url: https://example.com
+    display_url: example.com
+    icon: bar_chart
+
+  Grafana:
+    url: https://example.com
+    display_url: example.com
+    icon: trending_up
+
+  Plex:
+    url: https://example.com
+    display_url: example.com
+    icon: tv
+
+  Nextcloud:
+    url: https://example.com
+    display_url: example.com
+    icon: filter_drama
+
+  Ghost:
+    url: https://example.com
+    display_url: example.com
+    icon: rss_feed
+
+  Minecraft:
+    url: https://example.com
+    display_url: example.com
+    icon: games
+
+  ESXi:
+    url: https://example.com
+    display_url: example.com
+    icon: dns
+
+bookmarks:
+  Wikis:
+    - name: Wikipedia
+      url: https://example.com
+    - name: Arch Linux Wiki
+      url: https://wiki.archlinux.org
+
+  Dev:
+    - name: JSFiddle
+      url: https://jsfiddle.net
+    - name: Codepen
+      url: https://codepen.io
+
+  Media:
+    - name: Soundcloud
+      url: https://soundcloud.com
+    - name: YouTube
+      url: https://youtube.com
+    - name: Twitch
+      url: https://twitch.tv
+
+  Social Networks:
+    - name: Facebook
+      url: https://facebook.com
+    - name: Twitter
+      url: https://twitter.com
+    - name: Instagram
+      url: https://instagram.com
+
+  Imageboards:
+    - name: Reddit
+      url: https://reddit.com
+    - name: 4chan
+      url: https://4chan.org
+
+  Technology:
+    - name: Hackernoon
+      url: https://hackernoon.com
+    - name: The Verge
+      url: https://theverge.com
+    - name: Hackernews
+      url: https://news.ycombinator.com
