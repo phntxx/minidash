@@ -66,6 +66,7 @@ This tool requires three environment variables to be set:
 
 - `TEMPLATE_FILE`: The path to the template file. With the docker image this defaults to `/app/template.hbs`.
 - `CONFIG_FILE`: The path to the config file. With the docker image this defaults to `/app/config.yml`.
+- `STATIC_PATH`: The path where static files are hosted. These can then be accessed by navigating to - e.g. - `/static/test.png`. With the docker image this defaults to `/app/data/static`.
 - `ADDRESS`: The IP-address and port that the web server should listen on. With the docker image this defaults to `0.0.0.0:3000`.
 
 These three variables need to be set when running `cargo run` in order for the program to do anything.
