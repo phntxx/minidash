@@ -38,5 +38,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v7
           tags: |
-            phntxx/minidash-rust:latest
-            ghcr.io/phntxx/minidash-rust:latest
+            phntxx/minidash:latest
+            ghcr.io/phntxx/minidash:latest

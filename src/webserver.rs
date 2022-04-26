@@ -52,7 +52,7 @@ fn response(state: State) -> (State, Response<Body>) {
     (state, response)
 }
 
-fn router(template: &'static str, state: Arc<Mutex<Config>>) -> Router {
+fn router(template: &'static str, static_path: &'static str, state: Arc<Mutex<Config>>) -> Router {
 
     let web_state = WebState { template: template, state: state};
     let middleware = StateMiddleware::new(web_state);
@@ -61,11 +61,12 @@ fn router(template: &'static str, state: Arc<Mutex<Config>>) -> Router {
 
     build_router(chain, pipelines, |route| {
         route.get("/").to(response);
+        route.get("/static/*").to_dir(static_path);
     })
 }
 
-pub fn run(address: &'static str, template: &'static str, state: Arc<Mutex<Config>>) {
-    let result = gotham::start(address, router(template, state));
+pub fn run(address: &'static str, template: &'static str, static_path: &'static str, state: Arc<Mutex<Config>>) {
+    let result = gotham::start(address, router(template, static_path, state));
 
     match result {
         Ok(_msg) => info!("Webserver started successfully"),

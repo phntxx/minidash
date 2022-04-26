@@ -10,6 +10,7 @@ use structure::Config;
 lazy_static! {
     static ref CONFIG_FILE: String = var("CONFIG_FILE").unwrap();
     static ref TEMPLATE_FILE: String = var("TEMPLATE_FILE").unwrap();
+    static ref STATIC_PATH: String = var("STATIC_PATH").unwrap();
     static ref ADDRESS: String = var("ADDRESS").unwrap();
 }
 
@@ -34,7 +35,7 @@ fn main() {
 
     let webserver_state = state.clone();
     let webserver_handle = thread::spawn(move || {
-        webserver::run(&ADDRESS, &TEMPLATE_FILE, webserver_state);
+        webserver::run(&ADDRESS, &TEMPLATE_FILE, &STATIC_PATH, webserver_state);
     });
     
     notifier_handle.join().unwrap();

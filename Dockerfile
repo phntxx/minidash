@@ -20,6 +20,7 @@ USER minidash
 ENV RUST_LOG="minidash_rust"
 ENV CONFIG_FILE="/app/data/config.yml"
 ENV TEMPLATE_FILE="/app/data/template.hbs"
+ENV STATIC_PATH="/app/data/static"
 ENV ADDRESS="0.0.0.0:3000"
 
 ENTRYPOINT ["./minidash-rust"]
