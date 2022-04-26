@@ -1,5 +1,9 @@
 # Minidash - because [dashboard][dashboard] is bloat.
 
+[![Docker Cloud Build Status][shield-docker]][docker]
+[![Docker Image Size (latest)][shield-docker-image]][docker]
+[![GitHub License][shield-license]][license]
+
 ![Minidash screenshot][screenshot]
 
 Minidash is a reinterpretation of the original [dashboard project][dashboard].
@@ -79,3 +83,8 @@ Additionally, since this project uses the [`env-logger`][env-logger] crate, the 
 [data-dir]: https://github.com/phntxx/minidash/tree/main/data
 [template]: https://github.com/phntxx/minidash/tree/main/data/template.hbs
 [env-logger]: https://crates.io/crates/env_logger
+[docker]: https://hub.docker.com/r/phntxx/minidash
+[license]: https://github.com/phntxx/minidash/LICENSE
+[shield-docker]: https://img.shields.io/docker/cloud/build/phntxx/minidash
+[shield-docker-image]: https://img.shields.io/docker/image-size/phntxx/minidash/latest
+[shield-license]: https://img.shields.io/github/license/phntxx/minidash.svg
