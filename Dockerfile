@@ -8,7 +8,7 @@ RUN apk add --no-cache musl-dev
 RUN cargo build --release
 
 # User: Get the executable and run it
-FROM alpine
+FROM alpine:latest
 
 RUN addgroup -g 1000 minidash
 RUN adduser -D -s /bin/sh -u 1000 -G minidash minidash

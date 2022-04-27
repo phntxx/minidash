@@ -43,3 +43,22 @@ pub fn run(config: &str, state: Arc<Mutex<Config>>) {
         }
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_read() {
+        let config_file = "./data/config.yml";
+        let def_state = Config::new();
+        let state: Arc<Mutex<Config>> = Arc::new(Mutex::new(Config::new()));
+
+        read(config_file, &state);
+
+        if let Ok(s) = state.lock() {
+            assert_ne!(*s, def_state);
+        };
+    }
+}
