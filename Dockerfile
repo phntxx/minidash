@@ -1,6 +1,6 @@
 # Builder: Downloads dependencies, compiles the project,
 # passes on the executable
-FROM rust:alpine as build
+FROM rust:latest as build
 
 WORKDIR /app
 COPY . .
