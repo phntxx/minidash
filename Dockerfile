@@ -1,6 +1,6 @@
 # Builder: Downloads dependencies, compiles the project,
 # passes on the executable
-FROM rust:latest as build
+FROM rust:slim as build
 
 WORKDIR /app
 COPY . .
