@@ -21,6 +21,10 @@ jobs:
 
       - name: Set up Rust toolchain
         uses: actions-rs/toolchain@v1.0.6
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
 
       - name: Unit tests
         uses: actions-rs/cargo@v1.0.1
