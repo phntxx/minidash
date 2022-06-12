@@ -15,12 +15,13 @@ RUN adduser -D -s /bin/sh -u 1000 -G minidash minidash
 
 WORKDIR /app
 COPY --from=build --chmod=777 --chown=minidash:minidash /app/target/release/minidash-rust ./
+COPY data defaults
 USER minidash
 
-ENV RUST_LOG="minidash_rust"
+ENV RUST_LOG="minidash"
 ENV CONFIG_FILE="/app/data/config.yml"
 ENV TEMPLATE_FILE="/app/data/template.hbs"
 ENV STATIC_PATH="/app/data/static"
 ENV ADDRESS="0.0.0.0:3000"
 
-ENTRYPOINT ["./minidash-rust"]
+ENTRYPOINT ["./entrypoint.sh"]
