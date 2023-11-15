@@ -23,7 +23,8 @@ fi
 
 if [[ ! -f $STATIC_PATH ]]; then
   mkdir -p "$STATIC_PATH"
-  mv defaults/static/* $STATIC_PATH
+  cp -r defaults/static/* $STATIC_PATH
+  rm -rf defaults/static
 else
   rm -rf defaults/static
 fi
