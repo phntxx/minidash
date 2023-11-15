@@ -22,7 +22,8 @@ else
 fi
 
 if [[ ! -f $STATIC_PATH ]]; then
-  mv defaults/static $STATIC_PATH
+  mkdir -p "$STATIC_PATH"
+  mv defaults/static/* $STATIC_PATH
 else
   rm -rf defaults/static
 fi
