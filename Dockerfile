@@ -22,5 +22,7 @@ ENV TEMPLATE_FILE="/app/data/template.hbs"
 ENV STATIC_PATH="/app/data/static"
 ENV ADDRESS="0.0.0.0:3000"
 
+EXPOSE 3000/tcp
+
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["./minidash"]
