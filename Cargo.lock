@@ -581,6 +581,7 @@ dependencies = [
  "lazy_static",
  "log",
  "notify",
+ "rand",
  "serde",
  "serde_yaml",
 ]

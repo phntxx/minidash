@@ -10,8 +10,10 @@ use gotham::{
 };
 
 use handlebars::Handlebars;
+use serde::Serialize;
 use std::{error::Error, sync::{Arc, Mutex}};
 use log::{info, warn};
+use rand::distributions::{Alphanumeric, DistString};
 
 use crate::structure::Config;
 
@@ -21,7 +23,17 @@ struct WebState {
     state: Arc<Mutex<Config>>
 }
 
-fn generate_template(template: &str, state: Arc<Mutex<Config>>) -> Result<String, Box<dyn Error>> {
+#[derive(Clone, StateData, Serialize)]
+struct TemplateData {
+    state: Config,
+    nonce: String
+}
+
+fn generate_nonce() -> String {
+    return Alphanumeric.sample_string(&mut rand::thread_rng(), 16);
+}
+
+fn generate_template(template: &str, state: Arc<Mutex<Config>>, nonce: String) -> Result<String, Box<dyn Error + 'static>> {
     let mut handlebars = Handlebars::new();
     let result = handlebars.register_template_file("template", template);
 
@@ -31,16 +43,24 @@ fn generate_template(template: &str, state: Arc<Mutex<Config>>) -> Result<String
     }
 
     let s = state.lock().unwrap();
-    let rendered_template = handlebars.render("template", &*s)?;
+    let template_data = TemplateData {
+        state: s.clone(),
+        nonce: nonce
+    };
+
+    let rendered_template = handlebars.render("template", &template_data)?;
     
     Ok(rendered_template)
 }
 
 fn response(state: State) -> (State, Response<Body>) {
-    let web_state = WebState::borrow_from(&state);
-    let template = generate_template(web_state.template, web_state.state.clone());
+    let nonce = generate_nonce();
+    let csp = format!("default-src 'self'; img-src *; style-src 'self'; script-src 'self' 'nonce-{}'", nonce);
 
-    let response = match template {
+    let web_state = WebState::borrow_from(&state);
+    let template = generate_template(web_state.template, web_state.state.clone(), nonce.clone());
+
+    let mut response = match template {
         Ok(rendered_template) => {
             create_response(&state, StatusCode::OK, "text/html".parse().unwrap(), rendered_template)
         },
@@ -48,6 +68,9 @@ fn response(state: State) -> (State, Response<Body>) {
             create_empty_response(&state, StatusCode::INTERNAL_SERVER_ERROR)
         }
     };
+
+    let headers = response.headers_mut();
+    headers.insert("Content-Security-Policy", csp.parse().unwrap());
 
     (state, response)
 }
@@ -130,7 +153,8 @@ mod tests {
         let template_file = "./data/template.hbs";
         let state: Arc<Mutex<Config>> = Arc::new(Mutex::new(Config::new()));
 
-        let template = generate_template(template_file, state);
+        let nonce = generate_nonce();
+        let template = generate_template(template_file, state, nonce);
 
         let result =  match template {
             Ok(_ok) => 0,
@@ -145,7 +169,8 @@ mod tests {
         let template_file = "./data/fail.hbs";
         let state: Arc<Mutex<Config>> = Arc::new(Mutex::new(Config::new()));
 
-        let template = generate_template(template_file, state);
+        let nonce = generate_nonce();
+        let template = generate_template(template_file, state, nonce);
 
         let result =  match template {
             Ok(_ok) => 0,

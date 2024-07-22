@@ -1,10 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>minidash</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
+    <link rel="stylesheet" href="static/css/font.css" />
     <link rel="stylesheet" href="static/css/index.css" />
   </head>
   <body>
@@ -12,7 +10,7 @@
       <h1 class="title">minidash</h1>
 
       <div class="apps">
-        {{#each apps}}
+        {{#each state.apps}}
           <div class="app-container">
             <div class="app-icon-container">
               <i class="app-icon">{{this.icon}}</i>
